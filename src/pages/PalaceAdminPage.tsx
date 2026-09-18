@@ -216,6 +216,7 @@ export const PalaceAdminPage: React.FC = () => {
                   <img
                     src={member.photograph}
                     alt={member.fullName}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -258,7 +259,11 @@ export const PalaceAdminPage: React.FC = () => {
             {/* Card Footer: Status & Admin Controls */}
             <div className="p-4 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-xs">
               <div className="flex items-center gap-1.5">
-                {member.isActive ? (
+                {member.id === 'pm-predecessor' || member.traditionalTitle.includes('Predecessor') ? (
+                  <span className="flex items-center gap-1 text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded-full font-bold text-[10px]">
+                    ★ Royal Archival Lineage
+                  </span>
+                ) : member.isActive ? (
                   <span className="flex items-center gap-1 text-blue-800 font-semibold text-[11px]">
                     <CheckCircle className="w-3.5 h-3.5" /> Active Profile
                   </span>
@@ -321,6 +326,7 @@ export const PalaceAdminPage: React.FC = () => {
                 <img
                   src={activeMemberModal.photograph}
                   alt={activeMemberModal.fullName}
+                  referrerPolicy="no-referrer"
                   className="w-16 h-16 rounded-2xl object-cover border-2 border-amber-400 shadow"
                 />
                 <div>

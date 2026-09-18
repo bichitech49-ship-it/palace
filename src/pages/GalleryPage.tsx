@@ -160,6 +160,7 @@ export const GalleryPage: React.FC = () => {
               <img
                 src={item.url || item.mediaUrl}
                 alt={item.title}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
               <div className="absolute inset-0 bg-stone-950/20 group-hover:bg-stone-950/40 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
@@ -246,6 +247,7 @@ export const GalleryPage: React.FC = () => {
               <img
                 src={activeMedia.url || activeMedia.mediaUrl}
                 alt={activeMedia.title}
+                referrerPolicy="no-referrer"
                 className="max-h-[65vh] w-full object-contain"
               />
             </div>

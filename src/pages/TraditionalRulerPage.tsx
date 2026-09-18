@@ -12,6 +12,7 @@ import {
   X,
   Plus,
   Trash2,
+  Crown,
 } from 'lucide-react';
 import { useCommunity } from '../context/CommunityContext';
 
@@ -76,7 +77,8 @@ export const TraditionalRulerPage: React.FC = () => {
             <div className="w-48 h-60 sm:w-56 sm:h-72 rounded-2xl overflow-hidden border-4 border-amber-400 shadow-2xl bg-stone-800">
               <img
                 src={rulerInfo.officialPhotograph}
-                alt="Traditional Ruler of Unguwar Kanawa"
+                alt={rulerInfo.fullName}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -157,11 +159,58 @@ export const TraditionalRulerPage: React.FC = () => {
             {rulerInfo.installationInformation}
           </p>
           <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-600 space-y-1">
-            <p className="font-semibold text-stone-800">Custodian Role:</p>
-            <p>Presiding over community traditional festivals, religious observances, and harmonious relations between Unguwar Kanawa and neighboring communities in Kaduna Metropolis.</p>
+            <p className="font-semibold text-stone-800">Custodian Role & Zazzau Emirate Stature:</p>
+            <p>Conferred with the traditional title of Falakin Zazzau, representing Unguwar Kanawa with royal distinction while presiding over community traditional festivals, customary dispute resolution, and peaceful inter-communal cohesion in Kaduna Metropolis.</p>
           </div>
         </section>
       </div>
+
+      {/* Royal Lineage & Predecessor Tribute Section */}
+      <section className="bg-gradient-to-br from-[#23140C] via-[#382116] to-[#1C0E08] text-white rounded-3xl p-6 sm:p-10 border-2 border-[#8C5935]/60 shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 opacity-15 pointer-events-none arewa-pattern-coffee"></div>
+        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+          <div className="shrink-0 relative group">
+            <div className="w-40 h-52 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-2xl bg-stone-900">
+              <img
+                src="https://i.ibb.co/Zp0LP9hL/3b596dac-facd-42d6-9666-4cf268752216-1.jpg"
+                alt="Late Hakimi Abba Ibrahim Kura"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+              />
+            </div>
+            <span className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-amber-500 text-stone-950 text-[10px] font-extrabold uppercase tracking-wider shadow whitespace-nowrap">
+              Honored Predecessor
+            </span>
+          </div>
+
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4A2917] border border-[#8C5935] text-amber-300 text-[11px] font-semibold">
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span>Royal Lineage & Historic Heritage</span>
+            </div>
+            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
+              Late Hakimi Abba Ibrahim Kura
+            </h3>
+            <p className="text-xs sm:text-sm font-semibold text-amber-200">
+              Revered Former Hakimi of Unguwar Kanawa • Father & Predecessor to Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim
+            </p>
+            <p className="text-xs sm:text-sm text-[#D7C3B3] leading-relaxed">
+              The foundational pillar of modern Unguwar Kanawa traditional authority. Late Hakimi Abba Ibrahim Kura governed with selfless equity, securing vital public land reserves for community primary schools, mosques, and trade squares. His noble values, peaceful arbitration, and grassroots leadership remain the guiding light for his son and successor, Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim.
+            </p>
+            <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2">
+              <span className="text-[11px] font-medium px-3 py-1 rounded-lg bg-[#2E1A11] border border-[#6D4229] text-[#EADBCE]">
+                ★ Historic Stool of Unguwar Kanawa
+              </span>
+              <span className="text-[11px] font-medium px-3 py-1 rounded-lg bg-[#2E1A11] border border-[#6D4229] text-[#EADBCE]">
+                ★ Zazzau Emirate Heritage
+              </span>
+              <span className="text-[11px] font-medium px-3 py-1 rounded-lg bg-[#2E1A11] border border-[#6D4229] text-[#EADBCE]">
+                ★ Eternal Community Tribute
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Community Leadership Activities & Development Initiatives */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -236,6 +285,7 @@ export const TraditionalRulerPage: React.FC = () => {
                 <img
                   src={photo.url}
                   alt={photo.caption}
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                 />
               </div>

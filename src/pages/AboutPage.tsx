@@ -28,6 +28,18 @@ export const AboutPage: React.FC = () => {
         'Sub-demarcation of the community into organized residential wards (Shanu, Masallaci, Kasuwa, Sarki) under recognized traditional ward heads (Wakilai).',
     },
     {
+      year: 'Historic Era',
+      title: 'Reign of Late Hakimi Abba Ibrahim Kura',
+      description:
+        'The revered traditional tenure of Late Hakimi Abba Ibrahim Kura as District Head, securing vital land for schools, places of worship, and laying the groundwork for communal harmony across Kaduna.',
+    },
+    {
+      year: 'Present Era',
+      title: 'Stewardship of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim',
+      description:
+        'Succession and reign of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim as District Head of Unguwar Kanawa, advancing community electrification, water security, youth digital empowerment, and traditional ties with the Zazzau Emirate.',
+    },
+    {
       year: '1976',
       title: 'Establishment of LEA Primary School Unguwar Kanawa',
       description:
@@ -94,8 +106,8 @@ export const AboutPage: React.FC = () => {
 
   const leadershipStructure = [
     {
-      title: 'The Traditional Ruler (Mai Unguwar Kanawa)',
-      desc: 'The supreme traditional custodian of community culture, grassroots peace, and liaison with Kaduna North traditional emirate structures.',
+      title: 'The Traditional Ruler (Hakimin Unguwar Kanawa & Falakin Zazzau)',
+      desc: 'Incumbent District Head Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim, presiding as supreme custodian of community culture and peace, upholding the revered legacy of Late Hakimi Abba Ibrahim Kura and representing Unguwar Kanawa in the Zazzau Emirate.',
     },
     {
       title: 'Palace Secretary & Waziri',

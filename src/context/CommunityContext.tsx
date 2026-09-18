@@ -133,12 +133,44 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const [rulerInfo, setRulerInfo] = useState<TraditionalRulerInfo>(() => {
     const saved = localStorage.getItem('uk_ruler_info');
-    return saved ? JSON.parse(saved) : INITIAL_RULER_INFO;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          !parsed.fullName ||
+          parsed.fullName.includes('[Official') ||
+          parsed.isPlaceholder ||
+          !parsed.fullName.includes('Usman')
+        ) {
+          return INITIAL_RULER_INFO;
+        }
+        return parsed;
+      } catch (e) {
+        return INITIAL_RULER_INFO;
+      }
+    }
+    return INITIAL_RULER_INFO;
   });
 
   const [palaceMembers, setPalaceMembers] = useState<PalaceMember[]>(() => {
     const saved = localStorage.getItem('uk_palace_members');
-    return saved ? JSON.parse(saved) : INITIAL_PALACE_MEMBERS;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          !Array.isArray(parsed) ||
+          parsed.length === 0 ||
+          parsed[0]?.fullName?.includes('[Official') ||
+          !parsed[0]?.fullName?.includes('Usman')
+        ) {
+          return INITIAL_PALACE_MEMBERS;
+        }
+        return parsed;
+      } catch (e) {
+        return INITIAL_PALACE_MEMBERS;
+      }
+    }
+    return INITIAL_PALACE_MEMBERS;
   });
 
   const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
@@ -163,7 +195,18 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const [gallery, setGallery] = useState<GalleryItem[]>(() => {
     const saved = localStorage.getItem('uk_gallery');
-    return saved ? JSON.parse(saved) : INITIAL_GALLERY;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.some((g: GalleryItem) => g.id === 'gal-falakin-zazzau-usman')) {
+          return parsed;
+        }
+        return INITIAL_GALLERY;
+      } catch (e) {
+        return INITIAL_GALLERY;
+      }
+    }
+    return INITIAL_GALLERY;
   });
 
   const [documents, setDocuments] = useState<CommunityDocument[]>(() => {

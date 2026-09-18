@@ -151,7 +151,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-stone-800 border border-stone-700 mt-2">
                   <img
                     src={rulerInfo.officialPhotograph}
-                    alt="Traditional Ruler of Unguwar Kanawa"
+                    alt={rulerInfo.fullName}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-center filter brightness-95 contrast-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>
@@ -204,7 +205,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border-2 border-amber-400 shadow-xl bg-[#2A170E]">
                 <img
                   src={rulerInfo.officialPhotograph}
-                  alt="The Traditional Ruler"
+                  alt={rulerInfo.fullName}
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
               </div>

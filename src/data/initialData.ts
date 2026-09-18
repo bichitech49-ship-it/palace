@@ -15,85 +15,110 @@ import {
 } from '../types';
 
 export const INITIAL_RULER_INFO: TraditionalRulerInfo = {
-  fullName: '[Official Name Pending Palace Submission]',
-  traditionalTitle: 'Mai Unguwar Kanawa (The Traditional Ruler of Unguwar Kanawa)',
-  reignStartYear: 'Official Record Pending',
-  officialPhotograph: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+  fullName: 'Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim',
+  traditionalTitle: 'Hakimin Unguwar Kanawa & Falakin Zazzau',
+  reignStartYear: 'Incumbent Traditional Ruler & District Head',
+  officialPhotograph: 'https://i.ibb.co/mCp0C7S4/186d5e7d-fd42-4191-a76d-d15c203e6de2.jpg',
   welcomeMessage:
-    'In the name of the Almighty, the Most Gracious, the Most Merciful. I warmly welcome all esteemed elders, youth, women, residents, and visitors to the official digital platform of Unguwar Kanawa, Kaduna. This portal symbolizes our commitment to unity, transparency, cultural heritage preservation, and progressive community development for every family across our wards.',
+    'In the name of Allah, the Most Beneficent, the Most Merciful. I warmly welcome all esteemed elders, sons, daughters, youth, women, and visitors to the official digital portal of Unguwar Kanawa, Kaduna. Building upon the noble foundations and timeless wisdom laid by our revered forebears—most notably my late father, Late Hakimi Abba Ibrahim Kura—our traditional council remains steadfastly devoted to communal peace, mutual respect, infrastructural modernization, and purposeful empowerment across every ward in our community.',
   biography:
-    'This section is designated for the official biography, lineage, educational background, and noble journey of the revered Traditional Ruler of Unguwar Kanawa, Kaduna. Authorized palace administrators can update this profile at any time through the administration dashboard.',
+    'Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim is the reigning District Head (Hakimi) of Unguwar Kanawa, Kaduna North LGA, and prestigious holder of the historic Falakin Zazzau title from the revered Zazzau Emirate. Continuing a distinguished royal lineage of servant-leadership, integrity, and cultural guardianship, he succeeded his illustrious father, Late Hakimi Abba Ibrahim Kura. Under his visionary guidance, Unguwar Kanawa has embraced proactive community security, expanded solar electrification, sustainable water sanitation, youth apprenticeship networks, and close collaborative harmony between traditional institutions, civic leaders, and the Kaduna State Government.',
   leadershipHistory: [
-    'Traditional royal lineage serving the community of Unguwar Kanawa, Kaduna North LGA',
-    'Custodian of peace, grassroots harmony, and dispute resolution across all sub-wards',
-    'Liaison between the Unguwar Kanawa Traditional Council and the Kaduna State traditional and administrative institutions',
+    'Substantive Hakimi (District Head) of Unguwar Kanawa and distinguished titleholder of Falakin Zazzau within the Zazzau Emirate',
+    'Royal successor perpetuating the noble values, justice, and community development philosophy instituted by Late Hakimi Abba Ibrahim Kura',
+    'President and Presiding Officer of the Unguwar Kanawa Traditional Council across all autonomous wards (Shanu, Masallaci, Kasuwa, Sarki, and Railway)',
+    'Prominent advocate for peaceful co-existence, inter-religious solidarity, and grassroots security vigilance in Kaduna Metropolis',
   ],
   installationInformation:
-    'Formal traditional installation ceremony and presentation of staff of authority recorded in the community palace archives. Official documents and commemoration photographs will be published upon palace clearance.',
+    'Invested with traditional royal authority and formally conferred with the prestigious title of Falakin Zazzau by the Zazzau Emirate. His coronation and succession as Hakimin Unguwar Kanawa was celebrated across Kaduna as a reaffirmation of dynastic continuity, royal distinction, and dedicated service to the people.',
   leadershipActivities: [
-    'Weekly community council meetings with ward heads (Wakilai) and village elders',
-    'Monthly security review sessions in coordination with local neighborhood watch and security agencies',
-    'Direct sponsorship of annual educational merit awards for outstanding primary and secondary school pupils in Unguwar Kanawa',
-    'Grassroots mobilization for environmental sanitation and seasonal flood preparedness along community drainage channels',
+    'Presiding over regular Traditional Council sessions and dispute resolution arbitrations at the Unguwar Kanawa Palace Pavilion',
+    'Periodic security consultative dialogues with ward heads (Wakilai), religious leaders, neighborhood vigilantes, and law enforcement agencies',
+    'Patron of youth education programs, Quranic recitation competitions, and vocational apprenticeship scholarships',
+    'Community-wide mobilization for flood defense, drainage clearance, solar streetlight maintenance, and potable water stations',
   ],
   developmentInitiatives: [
-    'Solar-Powered Street Lighting Masterplan across central transit corridors',
-    'Unguwar Kanawa Clean Water Borehole Rehabilitation Initiative',
-    'Youth Skills & Vocational Empowerment Workshops in tailoring, computer literacy, and phone repairs',
-    'Women Grassroots Trade Micro-Credit Coordination Group',
+    'Sustained maintenance and expansion of Solar-Powered Streetlight arterial networks',
+    'Rehabilitation and modern reticulation of community solar water boreholes',
+    'Youth Technology Literacy & Vocational Training partnerships across tailoring, carpentry, and electrical trades',
+    'Women Micro-Enterprise and Market Trader Cooperative Support initiatives',
+    'Preservation of royal archives and cultural memorials honoring predecessors including Late Hakimi Abba Ibrahim Kura',
   ],
   speeches: [
     {
-      title: 'Address on Community Harmony & Youth Self-Reliance',
-      date: '2026-01-15',
-      occasion: 'Annual Unguwar Kanawa Community Gathering at Central Palace Ground',
+      title: 'Royal Address on Youth Responsibility, Education, and Civic Harmony',
+      date: '2026-02-10',
+      occasion: 'Annual Unguwar Kanawa Community Assembly at the Royal Palace',
       summary:
-        'A royal admonition urging the youth of Unguwar Kanawa to embrace vocational education, entrepreneurship, and maintain brotherhood across all neighborhoods.',
+        'A passionate royal appeal by Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim urging young men and women to shun social vices, embrace continuous learning and digital skills, and safeguard community peace.',
     },
     {
-      title: 'Call to Collective Action on Drainage Clearance and Environmental Health',
-      date: '2025-09-10',
-      occasion: 'Pre-Rainy Season Stakeholders Summit',
+      title: 'Royal Admonition on Preserving Historic Lineage and Collective Sanitation',
+      date: '2025-11-18',
+      occasion: 'Stakeholders Consultation with Ward Heads and Elders',
       summary:
-        'Direct appeal to all ward heads and residents to actively participate in community sanitation to keep waterways clean and prevent seasonal flooding.',
+        'Reflecting on the legacy of community pioneers and admonishing all residents to participate in environmental sanitation and mutual neighborhood security.',
     },
   ],
   officialPhotographs: [
     {
+      url: 'https://i.ibb.co/mCp0C7S4/186d5e7d-fd42-4191-a76d-d15c203e6de2.jpg',
+      caption: 'Official Royal Portrait of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim, Hakimin Unguwar Kanawa',
+    },
+    {
+      url: 'https://i.ibb.co/Zp0LP9hL/3b596dac-facd-42d6-9666-4cf268752216-1.jpg',
+      caption: 'Archival Portrait of Royal Predecessor: Late Hakimi Abba Ibrahim Kura in ceremonial regalia',
+    },
+    {
       url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
-      caption: '[Placeholder] Palace Traditional Hall - Formal audience during the Eid celebration delegation',
+      caption: 'Palace Traditional Hall - Formal audience during the Eid celebration delegation',
     },
     {
       url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
-      caption: '[Placeholder] Traditional Council in session discussing community development priorities',
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80',
-      caption: '[Placeholder] Annual Youth Sports & Culture Festival prize presentation at Unguwar Kanawa field',
+      caption: 'Traditional Council in session discussing community development priorities',
     },
   ],
-  isPlaceholder: true,
+  isPlaceholder: false,
 };
 
 export const INITIAL_PALACE_MEMBERS: PalaceMember[] = [
   {
     id: 'pm-1',
-    fullName: '[Official Traditional Ruler Name]',
-    traditionalTitle: 'Mai Unguwar Kanawa',
+    fullName: 'Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim',
+    traditionalTitle: 'Hakimin Unguwar Kanawa & Falakin Zazzau',
     position: 'Traditional Ruler',
     areaWard: 'Unguwar Kanawa Palace Grounds',
     responsibilities: [
-      'Supreme custodian of traditional authority and culture',
-      'President of Unguwar Kanawa Traditional Council',
-      'Final arbitrator of community arbitration matters',
+      'Supreme custodian of traditional authority, cultural heritage, and palace administration',
+      'President of the Unguwar Kanawa Traditional Council and final arbitrator of community mediation',
+      'Principal traditional liaison with the Zazzau Emirate Council and Kaduna State institutions',
     ],
     shortBiography:
-      '[Official bio placeholder] Leading Unguwar Kanawa with wisdom, fairness, and tireless dedication to community welfare.',
-    photograph: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+      'The reigning District Head (Hakimi) of Unguwar Kanawa and prestigious Falakin Zazzau, leading the community with wisdom, modern vision, and deep reverence for royal tradition.',
+    photograph: 'https://i.ibb.co/mCp0C7S4/186d5e7d-fd42-4191-a76d-d15c203e6de2.jpg',
     phone: '+234 803 000 1101',
     email: 'palace.ruler@unguwar-kanawa.kaduna.gov.ng',
     isActive: true,
     order: 1,
+  },
+  {
+    id: 'pm-predecessor',
+    fullName: 'Late Hakimi Abba Ibrahim Kura',
+    traditionalTitle: 'Late Hakimin Unguwar Kanawa (Revered Predecessor)',
+    position: 'Traditional Ruler',
+    areaWard: 'Royal Palace Heritage & Historical Registry',
+    responsibilities: [
+      'Foundational architect of modern Unguwar Kanawa traditional governance',
+      'Historical guardian of inter-ethnic unity and public educational land endowments',
+      'Revered predecessor whose values guide the continuing dynasty of the palace',
+    ],
+    shortBiography:
+      'The legendary Hakimi whose wisdom, justice, and visionary public land reservations laid the permanent bedrock of Unguwar Kanawa. Father to Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim.',
+    photograph: 'https://i.ibb.co/Zp0LP9hL/3b596dac-facd-42d6-9666-4cf268752216-1.jpg',
+    phone: 'Palace Archival Record',
+    email: 'archives@unguwar-kanawa.kaduna.gov.ng',
+    isActive: false,
+    order: 2,
   },
   {
     id: 'pm-2',
@@ -569,6 +594,26 @@ export const INITIAL_PROJECTS: CommunityProject[] = [
 ];
 
 export const INITIAL_GALLERY: GalleryItem[] = [
+  {
+    id: 'gal-falakin-zazzau-usman',
+    title: 'Official Portrait of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim',
+    category: 'Palace',
+    mediaType: 'photo',
+    mediaUrl: 'https://i.ibb.co/mCp0C7S4/186d5e7d-fd42-4191-a76d-d15c203e6de2.jpg',
+    caption: 'Official royal portrait of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim, Hakimin Unguwar Kanawa.',
+    date: 'Royal Registry',
+    albumName: 'Palace Governance & Royal Heritage',
+  },
+  {
+    id: 'gal-abba-ibrahim-kura',
+    title: 'Historic Portrait of Late Hakimi Abba Ibrahim Kura',
+    category: 'Palace',
+    mediaType: 'photo',
+    mediaUrl: 'https://i.ibb.co/Zp0LP9hL/3b596dac-facd-42d6-9666-4cf268752216-1.jpg',
+    caption: 'Official historical royal portrait of Late Hakimi Abba Ibrahim Kura, revered Hakimi and traditional ruler of Unguwar Kanawa, Kaduna.',
+    date: 'Royal Archival Heritage',
+    albumName: 'Palace Governance & Royal Heritage',
+  },
   {
     id: 'gal-1',
     title: 'Traditional Palace Gate & Royal Durbar Horsemen',
