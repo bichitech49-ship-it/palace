@@ -23,6 +23,9 @@ import { DocumentsPage } from './pages/DocumentsPage';
 import { MembersDirectoryPage } from './pages/MembersDirectoryPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { ForceMenPage } from './pages/ForceMenPage';
+import { TraditionalRulersDirectoryPage } from './pages/TraditionalRulersDirectoryPage';
+import { CommunityMembersPage } from './pages/CommunityMembersPage';
 
 const AppContent: React.FC = () => {
   const { currentTab, setCurrentTab } = useCommunity();
@@ -46,10 +49,17 @@ const AppContent: React.FC = () => {
         return <HomePage onNavigate={handleNavigate} />;
       case 'about':
         return <AboutPage />;
+      case 'traditional-rulers':
+        return <TraditionalRulersDirectoryPage />;
       case 'ruler':
         return <TraditionalRulerPage />;
       case 'palace':
         return <PalaceAdminPage />;
+      case 'forcemen':
+        return <ForceMenPage />;
+      case 'ordinary-members':
+      case 'community-members':
+        return <CommunityMembersPage />;
       case 'announcements':
         return <AnnouncementsPage initialSelectedId={currentTabId} />;
       case 'events':

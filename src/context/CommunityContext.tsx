@@ -13,6 +13,9 @@ import {
   INITIAL_PROJECTS,
   INITIAL_RULER_INFO,
   INITIAL_USERS,
+  INITIAL_FORCE_MEN,
+  INITIAL_TRADITIONAL_RULERS,
+  INITIAL_CITIZEN_STORIES,
 } from '../data/initialData';
 import {
   Announcement,
@@ -30,6 +33,10 @@ import {
   TraditionalRulerInfo,
   User,
   UserRole,
+  ForceMenOfficer,
+  TraditionalRulerLeader,
+  CitizenStory,
+  SecurityIncidentReport,
 } from '../types';
 
 interface CommunityContextType {
@@ -116,6 +123,19 @@ interface CommunityContextType {
   updateMessageStatus: (id: string, status: any) => void;
   switchUserRole: (role: UserRole) => void;
 
+  // Force Men & Community Security
+  forceMen: ForceMenOfficer[];
+  addForceOfficer: (officer: Omit<ForceMenOfficer, 'id'>) => void;
+  securityReports: SecurityIncidentReport[];
+  addSecurityReport: (report: Omit<SecurityIncidentReport, 'id' | 'date' | 'status'>) => void;
+
+  // Traditional Rulers Directory
+  traditionalRulers: TraditionalRulerLeader[];
+
+  // Community Members & Citizen Stories
+  citizenStories: CitizenStory[];
+  addCitizenStory: (story: Omit<CitizenStory, 'id'>) => void;
+
   // Permissions helpers
   canManageAll: boolean;
   canManagePalace: boolean;
@@ -161,7 +181,15 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           !Array.isArray(parsed) ||
           parsed.length === 0 ||
           parsed[0]?.fullName?.includes('[Official') ||
-          !parsed[0]?.fullName?.includes('Usman')
+          !parsed[0]?.fullName?.includes('Usman') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-usman-idris-kankia') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-auwal-musa-bayade') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-aliyu-umar-babanyadu') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-suleiman-abdullahi') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-muhammad-aminu-idris') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-abubakar-muhammed-abubakar-baana') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-abdullahi-aliyu-sultan') ||
+          !parsed.some((p: PalaceMember) => p.id === 'pm-imam-ibrahim-ahmed-dujima')
         ) {
           return INITIAL_PALACE_MEMBERS;
         }
@@ -198,7 +226,18 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.some((g: GalleryItem) => g.id === 'gal-falakin-zazzau-usman')) {
+        if (
+          Array.isArray(parsed) &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-falakin-zazzau-usman') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-usman-idris-kankia') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-auwal-musa-bayade') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-aliyu-umar-babanyadu') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-suleiman-abdullahi') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-muhammad-aminu-idris') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-abubakar-muhammed-abubakar-baana') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-abdullahi-aliyu-sultan') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-imam-ibrahim-ahmed-dujima')
+        ) {
           return parsed;
         }
         return INITIAL_GALLERY;
@@ -216,7 +255,28 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const [communityMembers, setCommunityMembers] = useState<CommunityMember[]>(() => {
     const saved = localStorage.getItem('uk_community_members');
-    return saved ? JSON.parse(saved) : INITIAL_COMMUNITY_MEMBERS;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          Array.isArray(parsed) &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-usman-idris-kankia') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-auwal-musa-bayade') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-aliyu-umar-babanyadu') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-suleiman-abdullahi') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-muhammad-aminu-idris') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-abubakar-muhammed-abubakar-baana') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-abdullahi-aliyu-sultan') &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-imam-ibrahim-ahmed-dujima')
+        ) {
+          return parsed;
+        }
+        return INITIAL_COMMUNITY_MEMBERS;
+      } catch (e) {
+        return INITIAL_COMMUNITY_MEMBERS;
+      }
+    }
+    return INITIAL_COMMUNITY_MEMBERS;
   });
 
   const [messages, setMessages] = useState<ContactMessage[]>(() => {
@@ -232,6 +292,23 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>(() => {
     const saved = localStorage.getItem('uk_audit_logs');
     return saved ? JSON.parse(saved) : INITIAL_AUDIT_LOGS;
+  });
+
+  const [forceMen, setForceMen] = useState<ForceMenOfficer[]>(() => {
+    const saved = localStorage.getItem('uk_force_men');
+    return saved ? JSON.parse(saved) : INITIAL_FORCE_MEN;
+  });
+
+  const [traditionalRulers] = useState<TraditionalRulerLeader[]>(INITIAL_TRADITIONAL_RULERS);
+
+  const [citizenStories, setCitizenStories] = useState<CitizenStory[]>(() => {
+    const saved = localStorage.getItem('uk_citizen_stories');
+    return saved ? JSON.parse(saved) : INITIAL_CITIZEN_STORIES;
+  });
+
+  const [securityReports, setSecurityReports] = useState<SecurityIncidentReport[]>(() => {
+    const saved = localStorage.getItem('uk_security_reports');
+    return saved ? JSON.parse(saved) : [];
   });
 
   // Sync to localStorage
@@ -286,6 +363,47 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     localStorage.setItem('uk_audit_logs', JSON.stringify(auditLogs));
   }, [auditLogs]);
+
+  useEffect(() => {
+    localStorage.setItem('uk_force_men', JSON.stringify(forceMen));
+  }, [forceMen]);
+
+  useEffect(() => {
+    localStorage.setItem('uk_citizen_stories', JSON.stringify(citizenStories));
+  }, [citizenStories]);
+
+  useEffect(() => {
+    localStorage.setItem('uk_security_reports', JSON.stringify(securityReports));
+  }, [securityReports]);
+
+  const addForceOfficer = (officer: Omit<ForceMenOfficer, 'id'>) => {
+    const newOfficer: ForceMenOfficer = {
+      ...officer,
+      id: `fm-${Date.now()}`,
+    };
+    setForceMen((prev) => [newOfficer, ...prev]);
+    logAudit('REGISTER_FORCE_OFFICER', 'ForceMenOfficer', newOfficer.fullName);
+  };
+
+  const addSecurityReport = (report: Omit<SecurityIncidentReport, 'id' | 'date' | 'status'>) => {
+    const newReport: SecurityIncidentReport = {
+      ...report,
+      id: `rep-${Date.now()}`,
+      date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      status: 'PENDING',
+    };
+    setSecurityReports((prev) => [newReport, ...prev]);
+    logAudit('SUBMIT_SECURITY_TIP', 'SecurityIncidentReport', `${report.incidentType} (${report.ward})`);
+  };
+
+  const addCitizenStory = (story: Omit<CitizenStory, 'id'>) => {
+    const newStory: CitizenStory = {
+      ...story,
+      id: `cs-${Date.now()}`,
+    };
+    setCitizenStories((prev) => [newStory, ...prev]);
+    logAudit('SHARE_CITIZEN_STORY', 'CitizenStory', newStory.fullName);
+  };
 
   // Log an audit action
   const logAudit = (action: string, entityType: string, entityTitle: string, details?: string) => {
@@ -764,6 +882,13 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         auditLogs,
         currentTab,
         setCurrentTab,
+        forceMen,
+        addForceOfficer,
+        securityReports,
+        addSecurityReport,
+        traditionalRulers,
+        citizenStories,
+        addCitizenStory,
         canManageAll,
         canManagePalace,
         canEditContent,

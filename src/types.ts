@@ -336,3 +336,67 @@ export interface AuditLog {
   entity?: string;
 }
 
+export type ForceBranch =
+  | 'Community Vigilance Service (Yan Sintiri / KADVS)'
+  | 'Nigeria Police Force Outpost'
+  | 'Neighborhood Night Patrol'
+  | 'Armed Forces Veterans Advisory'
+  | 'Traffic & Peace Volunteers';
+
+export interface ForceMenOfficer {
+  id: string;
+  fullName: string;
+  rankTitle: string;
+  branch: ForceBranch;
+  assignedWard: string;
+  phone: string;
+  stationBase: string;
+  badgeNumber?: string;
+  photograph: string;
+  specialization: string;
+  status: 'ON_DUTY' | 'PATROL' | 'RESERVE' | 'COMMAND';
+  commendations?: string[];
+  yearsOfService: number;
+}
+
+export interface SecurityIncidentReport {
+  id: string;
+  reportingName: string;
+  phone: string;
+  ward: string;
+  incidentType: string;
+  description: string;
+  location: string;
+  date: string;
+  status: 'PENDING' | 'DISPATCHED' | 'RESOLVED';
+  isAnonymous: boolean;
+}
+
+export interface TraditionalRulerLeader {
+  id: string;
+  fullName: string;
+  traditionalTitle: string;
+  roleLevel: 'DISTRICT_HEAD' | 'PREDECESSOR' | 'WARD_HEAD' | 'COUNCIL_TITLEHOLDER';
+  jurisdictionWard: string;
+  appointmentYear: string;
+  responsibilities: string[];
+  shortBiography: string;
+  photograph: string;
+  lineageNotes?: string;
+  palaceChamber?: string;
+  contactOffice?: string;
+  isActive: boolean;
+}
+
+export interface CitizenStory {
+  id: string;
+  fullName: string;
+  tradeOrRole: string;
+  ward: string;
+  quote: string;
+  story: string;
+  photograph: string;
+  yearsInCommunity: number;
+  highlightSkill: string;
+}
+

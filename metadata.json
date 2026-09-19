@@ -1,6 +1,6 @@
 {
   "name": "Unguwar Kanawa Kaduna Community Palace",
-  "description": "Official Digital Platform of the Traditional Council & Community of Unguwar Kanawa, Kaduna. Centralized announcements, palace administration, community events, news, development projects, and resources.",
+  "description": "Official Digital Platform of the Traditional Council & Community of Unguwar Kanawa, Kaduna North LGA. Featuring dedicated portals for our force men & security command, traditional rulers & ward heads, and grassroots community members.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

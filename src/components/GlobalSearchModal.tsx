@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, X, Calendar, Bell, Users, Hammer, FileText, Newspaper, Image as ImageIcon, ChevronRight } from 'lucide-react';
+import { Search, X, Calendar, Bell, Users, Hammer, FileText, Newspaper, Image as ImageIcon, ChevronRight, Shield, Crown, Heart } from 'lucide-react';
 import { useCommunity } from '../context/CommunityContext';
 
 interface GlobalSearchModalProps {
@@ -10,7 +10,7 @@ interface GlobalSearchModalProps {
 
 export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, onClose, onNavigate }) => {
   const [query, setQuery] = useState('');
-  const { announcements, events, news, palaceMembers, projects, documents, gallery } = useCommunity();
+  const { announcements, events, news, palaceMembers, projects, documents, gallery, forceMen, traditionalRulers, citizenStories } = useCommunity();
 
   if (!isOpen) return null;
 
@@ -81,6 +81,37 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, on
       )
     : [];
 
+  const filteredForceMen = cleanQuery
+    ? forceMen.filter(
+        (f) =>
+          f.fullName.toLowerCase().includes(cleanQuery) ||
+          f.rankTitle.toLowerCase().includes(cleanQuery) ||
+          (f.badgeNumber && f.badgeNumber.toLowerCase().includes(cleanQuery)) ||
+          f.assignedWard.toLowerCase().includes(cleanQuery) ||
+          f.branch.toLowerCase().includes(cleanQuery)
+      )
+    : [];
+
+  const filteredTraditionalRulers = cleanQuery
+    ? traditionalRulers.filter(
+        (r) =>
+          r.fullName.toLowerCase().includes(cleanQuery) ||
+          r.traditionalTitle.toLowerCase().includes(cleanQuery) ||
+          r.jurisdictionWard.toLowerCase().includes(cleanQuery) ||
+          r.shortBiography.toLowerCase().includes(cleanQuery)
+      )
+    : [];
+
+  const filteredStories = cleanQuery
+    ? citizenStories.filter(
+        (s) =>
+          s.fullName.toLowerCase().includes(cleanQuery) ||
+          s.tradeOrRole.toLowerCase().includes(cleanQuery) ||
+          s.ward.toLowerCase().includes(cleanQuery) ||
+          s.highlightSkill.toLowerCase().includes(cleanQuery)
+      )
+    : [];
+
   const totalResults =
     filteredAnnouncements.length +
     filteredEvents.length +
@@ -88,7 +119,10 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, on
     filteredPalace.length +
     filteredProjects.length +
     filteredDocuments.length +
-    filteredGallery.length;
+    filteredGallery.length +
+    filteredForceMen.length +
+    filteredTraditionalRulers.length +
+    filteredStories.length;
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 p-4 bg-stone-950/70 backdrop-blur-sm animate-fadeIn">
@@ -341,6 +375,93 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({ isOpen, on
                         <h4 className="text-sm font-semibold text-stone-900">{g.title}</h4>
                       </div>
                       <ChevronRight className="w-4 h-4 text-stone-400 shrink-0" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Force Men Results */}
+              {filteredForceMen.length > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase">
+                    <Shield className="w-3.5 h-3.5 text-amber-600" /> Force Men & Security Command ({filteredForceMen.length})
+                  </div>
+                  {filteredForceMen.slice(0, 3).map((f) => (
+                    <div
+                      key={f.id}
+                      onClick={() => {
+                        onClose();
+                        onNavigate('forcemen');
+                      }}
+                      className="p-3 bg-amber-50/60 hover:bg-amber-100/70 rounded-xl border border-amber-200/80 cursor-pointer flex items-center justify-between transition group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src={f.photograph} alt={f.fullName} className="w-9 h-9 rounded-full object-cover border border-amber-300" />
+                        <div>
+                          <span className="text-[11px] font-bold text-amber-900 uppercase tracking-wider">{f.rankTitle} • {f.branch}</span>
+                          <h4 className="text-sm font-semibold text-stone-900 group-hover:text-amber-900">{f.fullName}</h4>
+                          <p className="text-xs text-stone-500">{f.assignedWard}</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-amber-600 shrink-0" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Traditional Rulers Results */}
+              {filteredTraditionalRulers.length > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#5C4033] uppercase">
+                    <Crown className="w-3.5 h-3.5 text-[#D4AF37]" /> Traditional Rulers & Ward Heads ({filteredTraditionalRulers.length})
+                  </div>
+                  {filteredTraditionalRulers.slice(0, 3).map((r) => (
+                    <div
+                      key={r.id}
+                      onClick={() => {
+                        onClose();
+                        onNavigate('traditional-rulers');
+                      }}
+                      className="p-3 bg-[#FAF7F2] hover:bg-[#F5EBE1] rounded-xl border border-[#D4AF37]/40 cursor-pointer flex items-center justify-between transition group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src={r.photograph} alt={r.fullName} className="w-9 h-9 rounded-full object-cover border border-[#D4AF37]" />
+                        <div>
+                          <span className="text-[11px] font-bold text-[#5C4033] uppercase">{r.traditionalTitle}</span>
+                          <h4 className="text-sm font-semibold text-stone-900 group-hover:text-[#5C4033]">{r.fullName}</h4>
+                          <p className="text-xs text-stone-500">{r.jurisdictionWard}</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Community Members Stories Results */}
+              {filteredStories.length > 0 && (
+                <div className="space-y-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-rose-800 uppercase">
+                    <Heart className="w-3.5 h-3.5 text-rose-600" /> Community Members & Artisans ({filteredStories.length})
+                  </div>
+                  {filteredStories.slice(0, 3).map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => {
+                        onClose();
+                        onNavigate('ordinary-members');
+                      }}
+                      className="p-3 bg-rose-50/50 hover:bg-rose-100/60 rounded-xl border border-rose-200/60 cursor-pointer flex items-center justify-between transition group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src={s.photograph} alt={s.fullName} className="w-9 h-9 rounded-full object-cover border border-rose-300" />
+                        <div>
+                          <span className="text-[11px] font-bold text-rose-900">{s.tradeOrRole}</span>
+                          <h4 className="text-sm font-semibold text-stone-900">{s.fullName}</h4>
+                          <p className="text-xs text-stone-500">{s.ward} • {s.yearsInCommunity} Years in Town</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-rose-500 shrink-0" />
                     </div>
                   ))}
                 </div>

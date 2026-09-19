@@ -3,6 +3,8 @@ import {
   Bell,
   Calendar,
   Shield,
+  Crown,
+  Heart,
   ChevronRight,
   Sparkles,
   Edit3,
@@ -370,6 +372,125 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   Official Palace Council vetting
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3B. DEDICATED COMMUNITY PILLARS: FORCE MEN, TRADITIONAL RULERS & COMMUNITY MEMBERS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 pb-4">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold text-[#5C4033] uppercase tracking-widest">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+              <span>Community Pillars & Representation</span>
+            </div>
+            <h2 className="font-cinzel text-2xl font-bold text-stone-900 mt-1">
+              THE PILLARS OF UNGUWAR KANAWA
+            </h2>
+            <p className="text-xs sm:text-sm text-stone-600">
+              Dedicated portals for our gallant security personnel, royal traditional rulers, and grassroots community members
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 1. Our Force Men */}
+          <div className="bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#020617] text-white rounded-2xl p-6 border-2 border-amber-500/40 shadow-xl flex flex-col justify-between group hover:border-amber-400 transition">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="p-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400">
+                  <Shield className="w-6 h-6" />
+                </span>
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Active Patrols 24/7
+                </span>
+              </div>
+              <h3 className="font-cinzel text-xl font-bold text-white group-hover:text-amber-400 transition">
+                OUR FORCE MEN
+              </h3>
+              <p className="text-xs text-amber-200/80 font-medium mt-1">
+                Security Command & Yan Sintiri Vigilantes
+              </p>
+              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
+                Meet our dedicated joint patrol team: Nigeria Police DPO officers, accredited Yan Sintiri community vigilantes, and street night watchmen keeping all five wards secure.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span className="text-[11px] text-slate-400">Hotlines • Incidents • Officers</span>
+              <button
+                onClick={() => onNavigate('forcemen')}
+                className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition flex items-center gap-1.5"
+              >
+                <span>Enter Force Portal</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* 2. Traditional Rulers */}
+          <div className="bg-gradient-to-br from-[#2C241E] via-[#3E2723] to-[#1A120B] text-white rounded-2xl p-6 border-2 border-[#D4AF37]/50 shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="p-3 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#E5C158]">
+                  <Crown className="w-6 h-6" />
+                </span>
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#D4AF37]/20 text-[#E5C158] border border-[#D4AF37]/30">
+                  Zazzau Emirate
+                </span>
+              </div>
+              <h3 className="font-cinzel text-xl font-bold text-white group-hover:text-[#E5C158] transition">
+                TRADITIONAL RULERS
+              </h3>
+              <p className="text-xs text-[#D7CCC8] font-medium mt-1">
+                Council of Rulers & Autonomous Ward Heads
+              </p>
+              <p className="text-xs text-[#EFEBE9] mt-3 leading-relaxed">
+                Under the supreme leadership of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim. Explore the sovereign roster of ward heads (Masu Unguwa), palace titleholders, and book custom arbitration audiences.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-stone-800 flex items-center justify-between">
+              <span className="text-[11px] text-stone-400">Hakimi • Ward Heads • Council</span>
+              <button
+                onClick={() => onNavigate('traditional-rulers')}
+                className="px-4 py-2 rounded-lg bg-[#D4AF37] hover:bg-[#C5A028] text-[#2C241E] text-xs font-bold transition flex items-center gap-1.5"
+              >
+                <span>Rulers Directory</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* 3. Community Members */}
+          <div className="bg-gradient-to-br from-[#FAF7F2] via-white to-[#F5EBE1] text-[#2C241E] rounded-2xl p-6 border-2 border-stone-300 shadow-xl flex flex-col justify-between group hover:border-[#5C4033] transition">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="p-3 rounded-xl bg-[#5C4033]/10 border border-[#5C4033]/20 text-[#5C4033]">
+                  <Heart className="w-6 h-6 text-red-700" />
+                </span>
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                  Community Residents
+                </span>
+              </div>
+              <h3 className="font-cinzel text-xl font-bold text-[#2C241E] group-hover:text-[#5C4033] transition">
+                COMMUNITY MEMBERS
+              </h3>
+              <p className="text-xs text-[#5C4033] font-medium mt-1">
+                Al'ummar Unguwar Kanawa • Artisans & Neighbors
+              </p>
+              <p className="text-xs text-stone-600 mt-3 leading-relaxed">
+                The hardworking backbone of our town: carpenters, seamstresses, teachers, market traders, tricycle operators, and youths. Read their inspiring life stories, hire local services, or enroll in the community register.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-stone-200 flex items-center justify-between">
+              <span className="text-[11px] text-stone-500">Stories • Trade Roll • Voice</span>
+              <button
+                onClick={() => onNavigate('ordinary-members')}
+                className="px-4 py-2 rounded-lg bg-[#5C4033] hover:bg-[#4A3329] text-white text-xs font-bold transition flex items-center gap-1.5"
+              >
+                <span>Meet Members</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>

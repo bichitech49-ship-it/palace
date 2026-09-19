@@ -138,6 +138,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <ChevronRight className="w-3 h-3 text-stone-500" /> Photo & Video
               </button>
               <button
+                onClick={() => onNavigate('traditional-rulers')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Traditional Rulers
+              </button>
+              <button
+                onClick={() => onNavigate('forcemen')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Our Force Men
+              </button>
+              <button
+                onClick={() => onNavigate('ordinary-members')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Community Members
+              </button>
+              <button
                 onClick={() => onNavigate('contact')}
                 className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
               >
