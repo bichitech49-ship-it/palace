@@ -1,55 +1,53 @@
 import React from 'react';
+import { ArewaLogo } from './ArewaLogo';
 
 interface EmblemProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showSubtitle?: boolean;
   lightMode?: boolean;
+  variant?: 'full' | 'icon-only';
 }
 
-export const Emblem: React.FC<EmblemProps> = ({ size = 'md', showSubtitle = true, lightMode = false }) => {
+export const Emblem: React.FC<EmblemProps> = ({
+  size = 'md',
+  showSubtitle = true,
+  lightMode = true,
+  variant = 'full',
+}) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
-    md: 'w-12 h-12',
+    md: 'w-11 h-11',
     lg: 'w-16 h-16',
     xl: 'w-24 h-24',
   };
+
+  const logoSizes = {
+    sm: 'sm' as const,
+    md: 'md' as const,
+    lg: 'lg' as const,
+    xl: 'xl' as const,
+  };
+
+  if (variant === 'icon-only') {
+    return (
+      <div
+        className={`relative ${sizeClasses[size]} rounded-2xl bg-white p-1 border border-stone-300 shadow-sm flex items-center justify-center shrink-0 hover:scale-105 transition-transform`}
+        title="Official Northern Knot (Dagin Arewa) Community Logo"
+      >
+        <ArewaLogo size={logoSizes[size]} showShadow={false} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center gap-3">
       {/* Official Community Emblem / Logo Seal with Northern Arewa royal geometry */}
       <div
-        className={`relative ${sizeClasses[size]} rounded-full bg-gradient-to-br from-blue-900 via-slate-900 to-stone-950 p-0.5 border-2 border-amber-400 shadow-md flex items-center justify-center shrink-0 group`}
-        title="Unguwar Kanawa Official Community Seal / Emblem"
+        className={`relative ${sizeClasses[size]} rounded-2xl bg-white p-1 border border-stone-300 shadow-md flex items-center justify-center shrink-0 group hover:border-emerald-600 transition-all`}
+        title="Unguwar Kanawa Official Community Logo (Dagin Arewa)"
       >
-        <div className="w-full h-full rounded-full border border-amber-300/40 flex items-center justify-center bg-slate-950/90 relative overflow-hidden">
-          {/* Subtle Arewa Traditional Knot Vector */}
-          <svg
-            viewBox="0 0 100 100"
-            className="w-4/5 h-4/5 text-amber-400 fill-current drop-shadow-sm transition-transform duration-300 group-hover:scale-105"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Traditional Arewa geometric diamond loop & knot */}
-            <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2" />
-            <path
-              d="M50 16 L72 38 L50 60 L28 38 Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3.5"
-            />
-            <path
-              d="M50 40 L72 62 L50 84 L28 62 Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3.5"
-            />
-            <circle cx="50" cy="50" r="6.5" fill="#f59e0b" />
-            <circle cx="50" cy="20" r="3.5" fill="#f59e0b" />
-            <circle cx="50" cy="80" r="3.5" fill="#f59e0b" />
-            <circle cx="20" cy="50" r="3.5" fill="#f59e0b" />
-            <circle cx="80" cy="50" r="3.5" fill="#f59e0b" />
-          </svg>
-          {/* Palace Crown Top Accent */}
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-1.5 bg-amber-400 rounded-b-sm"></div>
+        <div className="w-full h-full rounded-xl flex items-center justify-center bg-white relative overflow-hidden">
+          <ArewaLogo size={logoSizes[size]} showShadow={false} />
         </div>
       </div>
 
@@ -58,17 +56,27 @@ export const Emblem: React.FC<EmblemProps> = ({ size = 'md', showSubtitle = true
         <div className="flex items-center gap-1.5">
           <span
             className={`font-cinzel font-extrabold tracking-wide uppercase leading-tight ${
-              lightMode ? 'text-stone-900' : 'text-stone-900'
+              lightMode ? 'text-stone-900' : 'text-white'
             } ${size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : size === 'xl' ? 'text-2xl' : 'text-base sm:text-lg'}`}
           >
             UNGUWAR KANAWA
           </span>
-          <span className="text-[10px] sm:text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 border border-amber-600/30">
+          <span
+            className={`text-[10px] sm:text-xs font-semibold px-1.5 py-0.5 rounded ${
+              lightMode
+                ? 'bg-emerald-50 text-emerald-800 border border-emerald-600/30'
+                : 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/50'
+            }`}
+          >
             KADUNA
           </span>
         </div>
         {showSubtitle && (
-          <span className="text-[10px] sm:text-xs text-blue-900 font-semibold tracking-tight">
+          <span
+            className={`text-[10px] sm:text-xs font-semibold tracking-tight ${
+              lightMode ? 'text-emerald-900' : 'text-emerald-300'
+            }`}
+          >
             Traditional Council & Community Palace
           </span>
         )}
@@ -76,3 +84,4 @@ export const Emblem: React.FC<EmblemProps> = ({ size = 'md', showSubtitle = true
     </div>
   );
 };
+

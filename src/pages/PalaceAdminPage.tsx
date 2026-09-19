@@ -161,7 +161,7 @@ export const PalaceAdminPage: React.FC = () => {
             UNGUWAR KANAWA PALACE ADMINISTRATION
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 max-w-2xl">
-            Directory of traditional council leaders, ward heads, palace advisers, women & youth leaders, and CDC executives serving Unguwar Kanawa.
+            Official seat of traditional authority and royal leadership representing the reigning Hakimi and revered late Hakimi of Unguwar Kanawa.
           </p>
         </div>
 

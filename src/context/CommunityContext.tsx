@@ -16,6 +16,7 @@ import {
   INITIAL_FORCE_MEN,
   INITIAL_TRADITIONAL_RULERS,
   INITIAL_CITIZEN_STORIES,
+  INITIAL_DISTINGUISHED_PERSONNEL,
 } from '../data/initialData';
 import {
   Announcement,
@@ -37,6 +38,7 @@ import {
   TraditionalRulerLeader,
   CitizenStory,
   SecurityIncidentReport,
+  DistinguishedPersonnel,
 } from '../types';
 
 interface CommunityContextType {
@@ -129,6 +131,13 @@ interface CommunityContextType {
   securityReports: SecurityIncidentReport[];
   addSecurityReport: (report: Omit<SecurityIncidentReport, 'id' | 'date' | 'status'>) => void;
 
+  // Distinguished Personnel (Military, Paramilitary, Police, Academicians)
+  distinguishedPersonnel: DistinguishedPersonnel[];
+  addDistinguishedPersonnel: (person: Omit<DistinguishedPersonnel, 'id' | 'joinedDate'>) => void;
+  addDistinguishedPersonnelBatch: (persons: Omit<DistinguishedPersonnel, 'id' | 'joinedDate'>[]) => void;
+  updateDistinguishedPersonnel: (id: string, person: Partial<DistinguishedPersonnel>) => void;
+  deleteDistinguishedPersonnel: (id: string) => void;
+
   // Traditional Rulers Directory
   traditionalRulers: TraditionalRulerLeader[];
 
@@ -173,27 +182,18 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const [palaceMembers, setPalaceMembers] = useState<PalaceMember[]>(() => {
-    const saved = localStorage.getItem('uk_palace_members');
+    const saved = localStorage.getItem('uk_palace_members_v3');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         if (
-          !Array.isArray(parsed) ||
-          parsed.length === 0 ||
-          parsed[0]?.fullName?.includes('[Official') ||
-          !parsed[0]?.fullName?.includes('Usman') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-usman-idris-kankia') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-auwal-musa-bayade') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-aliyu-umar-babanyadu') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-suleiman-abdullahi') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-muhammad-aminu-idris') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-abubakar-muhammed-abubakar-baana') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-abdullahi-aliyu-sultan') ||
-          !parsed.some((p: PalaceMember) => p.id === 'pm-imam-ibrahim-ahmed-dujima')
+          Array.isArray(parsed) &&
+          parsed.length > 0 &&
+          parsed.every((p: PalaceMember) => p.id === 'pm-1' || p.id === 'pm-predecessor')
         ) {
-          return INITIAL_PALACE_MEMBERS;
+          return parsed;
         }
-        return parsed;
+        return INITIAL_PALACE_MEMBERS;
       } catch (e) {
         return INITIAL_PALACE_MEMBERS;
       }
@@ -236,7 +236,9 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           parsed.some((g: GalleryItem) => g.id === 'gal-muhammad-aminu-idris') &&
           parsed.some((g: GalleryItem) => g.id === 'gal-abubakar-muhammed-abubakar-baana') &&
           parsed.some((g: GalleryItem) => g.id === 'gal-abdullahi-aliyu-sultan') &&
-          parsed.some((g: GalleryItem) => g.id === 'gal-imam-ibrahim-ahmed-dujima')
+          parsed.some((g: GalleryItem) => g.id === 'gal-imam-ibrahim-ahmed-dujima') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-alh-sani-shanuna-danmori') &&
+          parsed.some((g: GalleryItem) => g.id === 'gal-alh-abubakar-muhammad-jakada')
         ) {
           return parsed;
         }
@@ -254,20 +256,14 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const [communityMembers, setCommunityMembers] = useState<CommunityMember[]>(() => {
-    const saved = localStorage.getItem('uk_community_members');
+    const saved = localStorage.getItem('uk_community_members_v3');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         if (
           Array.isArray(parsed) &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-usman-idris-kankia') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-auwal-musa-bayade') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-aliyu-umar-babanyadu') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-suleiman-abdullahi') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-muhammad-aminu-idris') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-abubakar-muhammed-abubakar-baana') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-abdullahi-aliyu-sultan') &&
-          parsed.some((m: CommunityMember) => m.id === 'cm-imam-ibrahim-ahmed-dujima')
+          parsed.length > 0 &&
+          parsed.some((m: CommunityMember) => m.id === 'cm-usman-idris-kankia')
         ) {
           return parsed;
         }
@@ -311,6 +307,11 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [distinguishedPersonnel, setDistinguishedPersonnel] = useState<DistinguishedPersonnel[]>(() => {
+    const saved = localStorage.getItem('uk_distinguished_personnel');
+    return saved ? JSON.parse(saved) : INITIAL_DISTINGUISHED_PERSONNEL;
+  });
+
   // Sync to localStorage
   useEffect(() => {
     localStorage.setItem('uk_current_user', JSON.stringify(currentUser));
@@ -321,7 +322,7 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [rulerInfo]);
 
   useEffect(() => {
-    localStorage.setItem('uk_palace_members', JSON.stringify(palaceMembers));
+    localStorage.setItem('uk_palace_members_v3', JSON.stringify(palaceMembers));
   }, [palaceMembers]);
 
   useEffect(() => {
@@ -349,7 +350,7 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [documents]);
 
   useEffect(() => {
-    localStorage.setItem('uk_community_members', JSON.stringify(communityMembers));
+    localStorage.setItem('uk_community_members_v3', JSON.stringify(communityMembers));
   }, [communityMembers]);
 
   useEffect(() => {
@@ -375,6 +376,47 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     localStorage.setItem('uk_security_reports', JSON.stringify(securityReports));
   }, [securityReports]);
+
+  useEffect(() => {
+    localStorage.setItem('uk_distinguished_personnel', JSON.stringify(distinguishedPersonnel));
+  }, [distinguishedPersonnel]);
+
+  const addDistinguishedPersonnel = (person: Omit<DistinguishedPersonnel, 'id' | 'joinedDate'>) => {
+    const newPerson: DistinguishedPersonnel = {
+      ...person,
+      id: `dp-${Date.now()}`,
+      joinedDate: new Date().toISOString().substring(0, 10),
+    };
+    setDistinguishedPersonnel((prev) => [newPerson, ...prev]);
+    logAudit('REGISTER_DISTINGUISHED_PERSONNEL', person.category, newPerson.fullName);
+  };
+
+  const addDistinguishedPersonnelBatch = (persons: Omit<DistinguishedPersonnel, 'id' | 'joinedDate'>[]) => {
+    const today = new Date().toISOString().substring(0, 10);
+    const newItems: DistinguishedPersonnel[] = persons.map((p, idx) => ({
+      ...p,
+      id: `dp-${Date.now()}-${idx}-${Math.random().toString(36).substring(2, 6)}`,
+      joinedDate: today,
+    }));
+    setDistinguishedPersonnel((prev) => [...newItems, ...prev]);
+    logAudit(
+      'BATCH_REGISTER_DISTINGUISHED_PERSONNEL',
+      'Batch',
+      `Registered ${persons.length} profiles in bulk`
+    );
+  };
+
+  const updateDistinguishedPersonnel = (id: string, updated: Partial<DistinguishedPersonnel>) => {
+    setDistinguishedPersonnel((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...updated } : p))
+    );
+    logAudit('UPDATE_DISTINGUISHED_PERSONNEL', 'Personnel', `Updated ID: ${id}`);
+  };
+
+  const deleteDistinguishedPersonnel = (id: string) => {
+    setDistinguishedPersonnel((prev) => prev.filter((p) => p.id !== id));
+    logAudit('DELETE_DISTINGUISHED_PERSONNEL', 'Personnel', `Deleted ID: ${id}`);
+  };
 
   const addForceOfficer = (officer: Omit<ForceMenOfficer, 'id'>) => {
     const newOfficer: ForceMenOfficer = {
@@ -886,6 +928,11 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         addForceOfficer,
         securityReports,
         addSecurityReport,
+        distinguishedPersonnel,
+        addDistinguishedPersonnel,
+        addDistinguishedPersonnelBatch,
+        updateDistinguishedPersonnel,
+        deleteDistinguishedPersonnel,
         traditionalRulers,
         citizenStories,
         addCitizenStory,

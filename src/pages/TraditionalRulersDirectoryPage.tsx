@@ -17,6 +17,8 @@ import {
   Award,
   Users,
   Scroll,
+  ZoomIn,
+  Eye,
 } from 'lucide-react';
 
 export const TraditionalRulersDirectoryPage: React.FC = () => {
@@ -26,6 +28,7 @@ export const TraditionalRulersDirectoryPage: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<string>('ALL');
   const [selectedWard, setSelectedWard] = useState<string>('ALL');
   const [selectedLeader, setSelectedLeader] = useState<TraditionalRulerLeader | null>(null);
+  const [previewImage, setPreviewImage] = useState<{ url: string; title: string; subtitle?: string } | null>(null);
 
   // Audience Booking Modal
   const [showAudienceModal, setShowAudienceModal] = useState(false);
@@ -234,56 +237,65 @@ export const TraditionalRulersDirectoryPage: React.FC = () => {
         </div>
 
         {/* Traditional Rulers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
           {filteredRulers.map((ruler) => (
             <div
               key={ruler.id}
-              className={`bg-white rounded-xl border overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between ${
+              className={`bg-white rounded-2xl border overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col justify-between group ${
                 ruler.roleLevel === 'DISTRICT_HEAD'
-                  ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/30'
+                  ? 'border-[#D4AF37] ring-2 ring-[#D4AF37]/40 bg-gradient-to-b from-amber-50/30 to-white'
                   : ruler.roleLevel === 'PREDECESSOR'
-                  ? 'border-amber-300/80 bg-amber-50/20'
+                  ? 'border-amber-300/80 bg-gradient-to-b from-amber-50/40 to-white'
                   : 'border-stone-200'
               }`}
             >
               <div>
                 {/* Card Header & Photo */}
-                <div className="p-5 pb-4 flex items-start gap-4">
-                  <div className="relative shrink-0">
-                    <img
-                      src={ruler.photograph}
-                      alt={ruler.fullName}
-                      className="w-20 h-20 rounded-xl object-cover border-2 border-[#D4AF37]/50 shadow-sm"
-                    />
-                    {ruler.roleLevel === 'DISTRICT_HEAD' && (
-                      <span className="absolute -top-2 -left-2 p-1 bg-[#D4AF37] rounded-full text-[#2C241E] shadow">
-                        <Crown className="w-3 h-3" />
+                <div className="p-5 pb-4 space-y-4">
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                    {/* Enlarged Prominent Portrait */}
+                    <div className="relative shrink-0 group/img cursor-pointer" onClick={() => setPreviewImage({ url: ruler.photograph, title: ruler.fullName, subtitle: ruler.traditionalTitle })}>
+                      <div className="w-28 h-32 sm:w-32 sm:h-36 rounded-2xl overflow-hidden border-3 border-[#D4AF37] shadow-md bg-stone-900 transition-transform duration-300 group-hover/img:scale-105">
+                        <img
+                          src={ruler.photograph}
+                          alt={ruler.fullName}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/img:opacity-100 transition-opacity rounded-2xl flex items-center justify-center text-white">
+                        <ZoomIn className="w-6 h-6 text-[#D4AF37] drop-shadow" />
+                      </div>
+                      {ruler.roleLevel === 'DISTRICT_HEAD' && (
+                        <span className="absolute -top-2 -left-2 p-1.5 bg-[#D4AF37] rounded-full text-[#2C241E] shadow-md">
+                          <Crown className="w-3.5 h-3.5" />
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0 text-center sm:text-left">
+                      <span
+                        className={`inline-block text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                          ruler.roleLevel === 'DISTRICT_HEAD'
+                            ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                            : ruler.roleLevel === 'PREDECESSOR'
+                            ? 'bg-stone-100 text-stone-700 border border-stone-300'
+                            : ruler.roleLevel === 'WARD_HEAD'
+                            ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+                            : 'bg-blue-100 text-blue-900 border border-blue-300'
+                        }`}
+                      >
+                        {ruler.roleLevel.replace('_', ' ')}
                       </span>
-                    )}
-                  </div>
 
-                  <div className="flex-1 min-w-0">
-                    <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
-                        ruler.roleLevel === 'DISTRICT_HEAD'
-                          ? 'bg-amber-100 text-amber-900 border border-amber-300'
-                          : ruler.roleLevel === 'PREDECESSOR'
-                          ? 'bg-stone-100 text-stone-700 border border-stone-300'
-                          : ruler.roleLevel === 'WARD_HEAD'
-                          ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
-                          : 'bg-blue-100 text-blue-900 border border-blue-300'
-                      }`}
-                    >
-                      {ruler.roleLevel.replace('_', ' ')}
-                    </span>
-
-                    <h3 className="font-serif font-bold text-base text-[#2C241E] mt-1.5 leading-snug">
-                      {ruler.fullName}
-                    </h3>
-                    <p className="text-xs font-semibold text-[#5C4033] mt-0.5">{ruler.traditionalTitle}</p>
-                    <p className="text-[11px] text-stone-500 mt-1 flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-[#D4AF37]" /> {ruler.appointmentYear}
-                    </p>
+                      <h3 className="font-serif font-bold text-base sm:text-lg text-[#2C241E] mt-1.5 leading-snug">
+                        {ruler.fullName}
+                      </h3>
+                      <p className="text-xs font-semibold text-[#5C4033] mt-1">{ruler.traditionalTitle}</p>
+                      <p className="text-[11px] text-stone-500 mt-1.5 flex items-center justify-center sm:justify-start gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" /> {ruler.appointmentYear}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -336,13 +348,13 @@ export const TraditionalRulersDirectoryPage: React.FC = () => {
                   onClick={() => setSelectedLeader(ruler)}
                   className="flex-1 px-3 py-2 rounded-lg bg-[#FAF7F2] hover:bg-stone-200 text-stone-800 text-xs font-semibold border border-stone-300 transition"
                 >
-                  View Stool Details
+                  View Royal Profile
                 </button>
 
                 {ruler.isActive && (
                   <button
                     onClick={() => openAudienceForLeader(ruler.fullName)}
-                    className="px-3 py-2 rounded-lg bg-[#5C4033] hover:bg-[#4A3329] text-white text-xs font-medium transition flex items-center gap-1"
+                    className="px-3 py-2 rounded-lg bg-[#5C4033] hover:bg-[#4A3329] text-white text-xs font-medium transition flex items-center gap-1 shadow-sm"
                   >
                     <Crown className="w-3.5 h-3.5 text-[#D4AF37]" />
                     Audience
@@ -556,16 +568,38 @@ export const TraditionalRulersDirectoryPage: React.FC = () => {
             </button>
 
             <div className="text-center">
-              <img
-                src={selectedLeader.photograph}
-                alt={selectedLeader.fullName}
-                className="w-28 h-28 rounded-2xl object-cover mx-auto border-3 border-[#D4AF37] shadow-lg"
-              />
-              <span className="inline-block mt-3 px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
-                {selectedLeader.roleLevel.replace('_', ' ')}
-              </span>
-              <h3 className="font-serif font-bold text-xl text-[#2C241E] mt-1.5">{selectedLeader.fullName}</h3>
-              <p className="text-sm font-semibold text-[#5C4033]">{selectedLeader.traditionalTitle}</p>
+              <div
+                className="relative inline-block group/modal cursor-pointer"
+                onClick={() =>
+                  setPreviewImage({
+                    url: selectedLeader.photograph,
+                    title: selectedLeader.fullName,
+                    subtitle: selectedLeader.traditionalTitle,
+                  })
+                }
+              >
+                <img
+                  src={selectedLeader.photograph}
+                  alt={selectedLeader.fullName}
+                  referrerPolicy="no-referrer"
+                  className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl object-cover mx-auto border-4 border-[#D4AF37] shadow-xl group-hover/modal:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover/modal:opacity-100 transition-opacity rounded-2xl flex items-center justify-center text-white">
+                  <span className="px-3 py-1 bg-black/70 rounded-full text-xs font-semibold flex items-center gap-1.5 text-[#D4AF37]">
+                    <ZoomIn className="w-3.5 h-3.5" /> Full Size Portrait
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <span className="inline-block mt-3 px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
+                  {selectedLeader.roleLevel.replace('_', ' ')}
+                </span>
+                <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#2C241E] mt-1.5">
+                  {selectedLeader.fullName}
+                </h3>
+                <p className="text-sm font-semibold text-[#5C4033]">{selectedLeader.traditionalTitle}</p>
+              </div>
             </div>
 
             <div className="mt-5 space-y-2.5 text-xs bg-[#FAF7F2] p-4 rounded-xl border border-stone-200">
@@ -632,6 +666,50 @@ export const TraditionalRulersDirectoryPage: React.FC = () => {
               >
                 Close
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Enlarged Full-Resolution Royal Portrait Lightbox Modal */}
+      {previewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div
+            className="relative max-w-2xl w-full bg-[#1A120B] rounded-3xl p-6 border-2 border-[#D4AF37] shadow-2xl overflow-hidden flex flex-col items-center text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-stone-300 hover:text-white hover:bg-black/90 transition z-10"
+              title="Close Full View"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <div className="w-full max-h-[65vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/40 border border-[#D4AF37]/40 shadow-inner">
+              <img
+                src={previewImage.url}
+                alt={previewImage.title}
+                referrerPolicy="no-referrer"
+                className="max-h-[62vh] max-w-full object-contain rounded-xl shadow-2xl"
+              />
+            </div>
+
+            <div className="mt-4 text-white">
+              <div className="inline-flex items-center gap-1 text-[11px] font-bold text-[#D4AF37] uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[#5C4033]/60 mb-1 border border-[#D4AF37]/30">
+                <Crown className="w-3.5 h-3.5" /> Official Traditional Ruler Portrait
+              </div>
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
+                {previewImage.title}
+              </h3>
+              {previewImage.subtitle && (
+                <p className="text-xs sm:text-sm text-[#D7CCC8] font-medium mt-0.5">
+                  {previewImage.subtitle}
+                </p>
+              )}
             </div>
           </div>
         </div>

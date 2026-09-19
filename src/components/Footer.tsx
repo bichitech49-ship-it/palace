@@ -90,16 +90,40 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <ChevronRight className="w-3 h-3 text-stone-500" /> About Community
               </button>
               <button
-                onClick={() => onNavigate('ruler')}
-                className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
-              >
-                <ChevronRight className="w-3 h-3 text-stone-500" /> Traditional Ruler
-              </button>
-              <button
                 onClick={() => onNavigate('palace')}
                 className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
               >
                 <ChevronRight className="w-3 h-3 text-stone-500" /> Palace Council
+              </button>
+              <button
+                onClick={() => onNavigate('military')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Military
+              </button>
+              <button
+                onClick={() => onNavigate('paramilitary')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Paramilitary
+              </button>
+              <button
+                onClick={() => onNavigate('police')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Police Command
+              </button>
+              <button
+                onClick={() => onNavigate('academicians')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Academicians
+              </button>
+              <button
+                onClick={() => onNavigate('ordinary-members')}
+                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+              >
+                <ChevronRight className="w-3 h-3 text-amber-400" /> Community Members
               </button>
               <button
                 onClick={() => onNavigate('announcements')}
@@ -123,13 +147,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 onClick={() => onNavigate('news')}
                 className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
               >
-                <ChevronRight className="w-3 h-3 text-stone-500" /> Community News
-              </button>
-              <button
-                onClick={() => onNavigate('documents')}
-                className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
-              >
-                <ChevronRight className="w-3 h-3 text-stone-500" /> Constitution & Docs
+                <ChevronRight className="w-3 h-3 text-stone-500" /> News & Media
               </button>
               <button
                 onClick={() => onNavigate('gallery')}
@@ -138,22 +156,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <ChevronRight className="w-3 h-3 text-stone-500" /> Photo & Video
               </button>
               <button
-                onClick={() => onNavigate('traditional-rulers')}
-                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
+                onClick={() => onNavigate('documents')}
+                className="text-left text-stone-300 hover:text-amber-400 transition flex items-center gap-1"
               >
-                <ChevronRight className="w-3 h-3 text-amber-400" /> Traditional Rulers
-              </button>
-              <button
-                onClick={() => onNavigate('forcemen')}
-                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
-              >
-                <ChevronRight className="w-3 h-3 text-amber-400" /> Our Force Men
-              </button>
-              <button
-                onClick={() => onNavigate('ordinary-members')}
-                className="text-left text-amber-300 hover:text-amber-200 transition flex items-center gap-1 font-semibold"
-              >
-                <ChevronRight className="w-3 h-3 text-amber-400" /> Community Members
+                <ChevronRight className="w-3 h-3 text-stone-500" /> Documents & Forms
               </button>
               <button
                 onClick={() => onNavigate('contact')}

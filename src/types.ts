@@ -388,6 +388,28 @@ export interface TraditionalRulerLeader {
   isActive: boolean;
 }
 
+export type DistinguishedCategory = 'Military' | 'Paramilitary' | 'Police' | 'Academicians';
+
+export interface DistinguishedPersonnel {
+  id: string;
+  fullName: string;
+  category: DistinguishedCategory;
+  branchOrField: string;
+  rankOrTitle: string;
+  institutionOrCommand: string;
+  assignedWardOrOrigin: string;
+  phone?: string;
+  email?: string;
+  photograph: string;
+  qualificationsOrSpecialization: string;
+  achievements?: string[];
+  status: 'ACTIVE_SERVICE' | 'RETIRED' | 'FACULTY' | 'COMMAND' | 'OFFICER';
+  biography?: string;
+  joinedDate?: string;
+  yearsOfService?: number;
+  badgeOrRegNumber?: string;
+}
+
 export interface CitizenStory {
   id: string;
   fullName: string;

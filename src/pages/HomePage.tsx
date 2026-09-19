@@ -17,9 +17,15 @@ import {
   FileText,
   AlertTriangle,
   Building,
+  Upload,
+  GraduationCap,
+  Award,
+  ShieldCheck,
+  PlusCircle,
 } from 'lucide-react';
 import { useCommunity } from '../context/CommunityContext';
 import { Emblem } from '../components/Emblem';
+import { DirectUploadModal } from '../components/DirectUploadModal';
 
 interface HomePageProps {
   onNavigate: (tab: string, itemId?: string) => void;
@@ -34,11 +40,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     projects,
     palaceMembers,
     canManagePalace,
+    distinguishedPersonnel,
   } = useCommunity();
 
   const [isEditingRulerMessage, setIsEditingRulerMessage] = useState(false);
   const [editedMessage, setEditedMessage] = useState(rulerInfo.welcomeMessage);
   const [editedTitle, setEditedTitle] = useState(rulerInfo.traditionalTitle);
+  const [isDirectUploadOpen, setIsDirectUploadOpen] = useState(false);
 
   // Filter urgent or prominent published announcements
   const publishedAnnouncements = announcements
@@ -90,45 +98,56 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 Serving as the official bridge uniting traditional rulers, the palace administration, community leaders, elders, youth, women, and residents of Unguwar Kanawa. Access verified notices, historical archives, and grassroots development milestones.
               </p>
 
-              {/* 5 Prominent Action Buttons required by prompt */}
+              {/* Prominent Action Buttons with Standard Matching Background Upload Button */}
               <div className="pt-2 flex flex-wrap gap-3">
+                {/* Standard Direct Upload Button matching the background */}
                 <button
-                  onClick={() => onNavigate('about')}
-                  className="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-900/40 transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                  onClick={() => setIsDirectUploadOpen(true)}
+                  className="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg border-2 border-stone-500 hover:border-amber-400 transition hover:-translate-y-0.5 flex items-center gap-2"
+                  title="Upload Names & Pictures Directly"
                 >
-                  <span>ABOUT OUR COMMUNITY</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <Upload className="w-4 h-4 text-amber-400" />
+                  <span>UPLOAD NAMES & PICTURES</span>
+                </button>
+
+                <button
+                  onClick={() => onNavigate('military')}
+                  className="px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-bold text-xs uppercase tracking-wider border border-stone-600 hover:border-amber-400 shadow-sm transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                >
+                  <Shield className="w-4 h-4 text-amber-400" />
+                  <span>MILITARY</span>
+                </button>
+
+                <button
+                  onClick={() => onNavigate('paramilitary')}
+                  className="px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-bold text-xs uppercase tracking-wider border border-stone-600 hover:border-amber-400 shadow-sm transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                >
+                  <Award className="w-4 h-4 text-amber-400" />
+                  <span>PARAMILITARY</span>
+                </button>
+
+                <button
+                  onClick={() => onNavigate('police')}
+                  className="px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-bold text-xs uppercase tracking-wider border border-stone-600 hover:border-blue-400 shadow-sm transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                >
+                  <ShieldCheck className="w-4 h-4 text-blue-400" />
+                  <span>POLICE</span>
+                </button>
+
+                <button
+                  onClick={() => onNavigate('academicians')}
+                  className="px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-bold text-xs uppercase tracking-wider border border-stone-600 hover:border-emerald-400 shadow-sm transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                >
+                  <GraduationCap className="w-4 h-4 text-emerald-400" />
+                  <span>ACADEMICIANS</span>
                 </button>
 
                 <button
                   onClick={() => onNavigate('palace')}
-                  className="px-4 py-2.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-wider border border-blue-700/60 transition hover:-translate-y-0.5 flex items-center gap-1.5"
+                  className="px-4 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-bold text-xs uppercase tracking-wider border border-stone-600 hover:border-stone-300 transition hover:-translate-y-0.5 flex items-center gap-1.5"
                 >
                   <span>PALACE ADMINISTRATION</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => onNavigate('announcements')}
-                  className="px-4 py-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-amber-300 font-bold text-xs uppercase tracking-wider border border-amber-500/30 transition hover:-translate-y-0.5 flex items-center gap-1.5"
-                >
-                  <Bell className="w-4 h-4 text-amber-400" />
-                  <span>ANNOUNCEMENTS</span>
-                </button>
-
-                <button
-                  onClick={() => onNavigate('events')}
-                  className="px-4 py-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-100 font-bold text-xs uppercase tracking-wider border border-stone-600 transition hover:-translate-y-0.5 flex items-center gap-1.5"
-                >
-                  <Calendar className="w-4 h-4 text-blue-400" />
-                  <span>UPCOMING EVENTS</span>
-                </button>
-
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 text-blue-200 font-bold text-xs uppercase tracking-wider border border-blue-800 transition hover:-translate-y-0.5 flex items-center gap-1.5"
-                >
-                  <span>CONTACT THE PALACE</span>
+                  <ChevronRight className="w-4 h-4 text-amber-400" />
                 </button>
               </div>
 
@@ -184,10 +203,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="mt-3 flex items-center justify-between text-xs px-2 pt-1 text-stone-300">
                   <span className="text-blue-300 font-medium">Reign: Traditional Heritage</span>
                   <button
-                    onClick={() => onNavigate('ruler')}
+                    onClick={() => onNavigate('palace')}
                     className="text-amber-400 font-bold hover:underline flex items-center gap-1"
                   >
-                    View Biography &rarr;
+                    Palace Administration &rarr;
                   </button>
                 </div>
               </div>
@@ -293,10 +312,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </span>
                 <span>•</span>
                 <button
-                  onClick={() => onNavigate('ruler')}
+                  onClick={() => onNavigate('palace')}
                   className="text-amber-400 font-semibold hover:underline"
                 >
-                  Read Full Leadership History & Speeches &rarr;
+                  Palace Administration & Traditional Council &rarr;
                 </button>
               </div>
             </div>
@@ -377,122 +396,200 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 3B. DEDICATED COMMUNITY PILLARS: FORCE MEN, TRADITIONAL RULERS & COMMUNITY MEMBERS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      {/* 3B. DEDICATED COMMUNITY PILLARS: MILITARY, PARAMILITARY, POLICE, ACADEMICIANS & DIRECT UPLOAD */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 pb-4">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#5C4033] uppercase tracking-widest">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              <span>Community Pillars & Representation</span>
+              <span>Roll of Honor & Professional Cadres</span>
             </div>
-            <h2 className="font-cinzel text-2xl font-bold text-stone-900 mt-1">
-              THE PILLARS OF UNGUWAR KANAWA
+            <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900 mt-1">
+              DISTINGUISHED PILLARS OF UNGUWAR KANAWA
             </h2>
             <p className="text-xs sm:text-sm text-stone-600">
-              Dedicated portals for our gallant security personnel, royal traditional rulers, and grassroots community members
+              Military, Paramilitary, Police, Academicians & Community Members who elevate our town
             </p>
           </div>
+
+          {/* Standard Beautiful Button matching background */}
+          <button
+            onClick={() => setIsDirectUploadOpen(true)}
+            className="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg border-2 border-stone-500 hover:border-amber-400 transition flex items-center gap-2 shrink-0 self-start sm:self-auto"
+          >
+            <Upload className="w-4 h-4 text-amber-400" />
+            <span>Upload Names & Pictures Directly</span>
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* 1. Our Force Men */}
-          <div className="bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#020617] text-white rounded-2xl p-6 border-2 border-amber-500/40 shadow-xl flex flex-col justify-between group hover:border-amber-400 transition">
+        {/* 4 Cadre Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* 1. Military */}
+          <div className="bg-gradient-to-br from-[#121A24] via-[#1E293B] to-[#0F172A] text-white rounded-2xl p-6 border-2 border-amber-500/40 shadow-xl flex flex-col justify-between group hover:border-amber-400 transition hover:-translate-y-1">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="p-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400">
                   <Shield className="w-6 h-6" />
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  Active Patrols 24/7
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                  Armed Forces
                 </span>
               </div>
-              <h3 className="font-cinzel text-xl font-bold text-white group-hover:text-amber-400 transition">
-                OUR FORCE MEN
+              <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-amber-400 transition">
+                MILITARY
               </h3>
               <p className="text-xs text-amber-200/80 font-medium mt-1">
-                Security Command & Yan Sintiri Vigilantes
+                Army • Air Force • Navy
               </p>
               <p className="text-xs text-slate-300 mt-3 leading-relaxed">
-                Meet our dedicated joint patrol team: Nigeria Police DPO officers, accredited Yan Sintiri community vigilantes, and street night watchmen keeping all five wards secure.
+                Honoring our gallant servicemen defending national sovereignty across the Nigerian Armed Forces formations.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
-              <span className="text-[11px] text-slate-400">Hotlines • Incidents • Officers</span>
+              <span className="text-[11px] text-slate-400">Officers & Veterans</span>
               <button
-                onClick={() => onNavigate('forcemen')}
-                className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold transition flex items-center gap-1.5"
+                onClick={() => onNavigate('military')}
+                className="px-3.5 py-1.5 rounded-lg bg-black hover:bg-neutral-900 text-white text-xs font-bold transition border border-stone-600 hover:border-amber-400 flex items-center gap-1 shadow-sm"
               >
-                <span>Enter Force Portal</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span>View Roll</span>
+                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
             </div>
           </div>
 
-          {/* 2. Traditional Rulers */}
-          <div className="bg-gradient-to-br from-[#2C241E] via-[#3E2723] to-[#1A120B] text-white rounded-2xl p-6 border-2 border-[#D4AF37]/50 shadow-xl flex flex-col justify-between group hover:border-[#D4AF37] transition">
+          {/* 2. Paramilitary */}
+          <div className="bg-gradient-to-br from-[#1C1814] via-[#2E231C] to-[#14100C] text-white rounded-2xl p-6 border-2 border-[#8C5935]/60 shadow-xl flex flex-col justify-between group hover:border-amber-400 transition hover:-translate-y-1">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="p-3 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#E5C158]">
-                  <Crown className="w-6 h-6" />
+                <span className="p-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400">
+                  <Award className="w-6 h-6" />
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#D4AF37]/20 text-[#E5C158] border border-[#D4AF37]/30">
-                  Zazzau Emirate
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-[#8C5935]/40 text-[#F5EDE6] border border-[#8C5935]/60">
+                  Border & Civil
                 </span>
               </div>
-              <h3 className="font-cinzel text-xl font-bold text-white group-hover:text-[#E5C158] transition">
-                TRADITIONAL RULERS
+              <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-amber-400 transition">
+                PARAMILITARY
               </h3>
-              <p className="text-xs text-[#D7CCC8] font-medium mt-1">
-                Council of Rulers & Autonomous Ward Heads
+              <p className="text-xs text-amber-200/80 font-medium mt-1">
+                Customs • NSCDC • FRSC • NIS
               </p>
-              <p className="text-xs text-[#EFEBE9] mt-3 leading-relaxed">
-                Under the supreme leadership of Hakimi Falakin Zazzau Alhaji Usman Abba Ibrahim. Explore the sovereign roster of ward heads (Masu Unguwa), palace titleholders, and book custom arbitration audiences.
+              <p className="text-xs text-stone-300 mt-3 leading-relaxed">
+                Recognizing distinguished officers serving in Nigeria Customs Service, Civil Defence Corps, Road Safety and Immigration.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-stone-800 flex items-center justify-between">
-              <span className="text-[11px] text-stone-400">Hakimi • Ward Heads • Council</span>
+              <span className="text-[11px] text-stone-400">Cadres & Corps</span>
               <button
-                onClick={() => onNavigate('traditional-rulers')}
-                className="px-4 py-2 rounded-lg bg-[#D4AF37] hover:bg-[#C5A028] text-[#2C241E] text-xs font-bold transition flex items-center gap-1.5"
+                onClick={() => onNavigate('paramilitary')}
+                className="px-3.5 py-1.5 rounded-lg bg-black hover:bg-neutral-900 text-white text-xs font-bold transition border border-stone-600 hover:border-amber-400 flex items-center gap-1 shadow-sm"
               >
-                <span>Rulers Directory</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span>View Roll</span>
+                <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
               </button>
             </div>
           </div>
 
-          {/* 3. Community Members */}
-          <div className="bg-gradient-to-br from-[#FAF7F2] via-white to-[#F5EBE1] text-[#2C241E] rounded-2xl p-6 border-2 border-stone-300 shadow-xl flex flex-col justify-between group hover:border-[#5C4033] transition">
+          {/* 3. Police */}
+          <div className="bg-gradient-to-br from-[#0B1528] via-[#10203E] to-[#070D18] text-white rounded-2xl p-6 border-2 border-blue-600/50 shadow-xl flex flex-col justify-between group hover:border-blue-400 transition hover:-translate-y-1">
             <div>
               <div className="flex items-center justify-between mb-4">
-                <span className="p-3 rounded-xl bg-[#5C4033]/10 border border-[#5C4033]/20 text-[#5C4033]">
-                  <Heart className="w-6 h-6 text-red-700" />
+                <span className="p-3 rounded-xl bg-blue-500/20 border border-blue-500/30 text-blue-300">
+                  <ShieldCheck className="w-6 h-6" />
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
-                  Community Residents
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-200 border border-blue-500/30">
+                  Law Enforcement
                 </span>
               </div>
-              <h3 className="font-cinzel text-xl font-bold text-[#2C241E] group-hover:text-[#5C4033] transition">
-                COMMUNITY MEMBERS
+              <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-blue-300 transition">
+                POLICE
               </h3>
-              <p className="text-xs text-[#5C4033] font-medium mt-1">
-                Al'ummar Unguwar Kanawa • Artisans & Neighbors
+              <p className="text-xs text-blue-200/80 font-medium mt-1">
+                NPF • DPO • CID • Operations
               </p>
-              <p className="text-xs text-stone-600 mt-3 leading-relaxed">
-                The hardworking backbone of our town: carpenters, seamstresses, teachers, market traders, tricycle operators, and youths. Read their inspiring life stories, hire local services, or enroll in the community register.
+              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
+                Saluting commissioned Nigeria Police Force officers upholding law, internal safety, and community order across Kaduna.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-stone-200 flex items-center justify-between">
-              <span className="text-[11px] text-stone-500">Stories • Trade Roll • Voice</span>
+            <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span className="text-[11px] text-slate-400">Command & Ranks</span>
               <button
-                onClick={() => onNavigate('ordinary-members')}
-                className="px-4 py-2 rounded-lg bg-[#5C4033] hover:bg-[#4A3329] text-white text-xs font-bold transition flex items-center gap-1.5"
+                onClick={() => onNavigate('police')}
+                className="px-3.5 py-1.5 rounded-lg bg-black hover:bg-neutral-900 text-white text-xs font-bold transition border border-stone-600 hover:border-blue-400 flex items-center gap-1 shadow-sm"
               >
-                <span>Meet Members</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span>View Roll</span>
+                <ChevronRight className="w-3.5 h-3.5 text-blue-400" />
               </button>
             </div>
           </div>
+
+          {/* 4. Academicians */}
+          <div className="bg-gradient-to-br from-[#0F1E19] via-[#162F27] to-[#0B1713] text-white rounded-2xl p-6 border-2 border-emerald-500/40 shadow-xl flex flex-col justify-between group hover:border-emerald-400 transition hover:-translate-y-1">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400">
+                  <GraduationCap className="w-6 h-6" />
+                </span>
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Scholars & Deans
+                </span>
+              </div>
+              <h3 className="font-cinzel text-lg font-bold text-white group-hover:text-emerald-400 transition">
+                ACADEMICIANS
+              </h3>
+              <p className="text-xs text-emerald-200/80 font-medium mt-1">
+                Professors • Doctors • Lecturers
+              </p>
+              <p className="text-xs text-slate-300 mt-3 leading-relaxed">
+                Celebrating university professors, research scholars, authors, and educators shaping intellectual development nationwide.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span className="text-[11px] text-slate-400">Faculties & Research</span>
+              <button
+                onClick={() => onNavigate('academicians')}
+                className="px-3.5 py-1.5 rounded-lg bg-black hover:bg-neutral-900 text-white text-xs font-bold transition border border-stone-600 hover:border-emerald-400 flex items-center gap-1 shadow-sm"
+              >
+                <span>View Roll</span>
+                <ChevronRight className="w-3.5 h-3.5 text-emerald-400" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Prominent Direct Upload Action Callout Banner */}
+        <div className="bg-gradient-to-r from-[#1C0E07] via-[#2E180E] to-[#120904] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#8C5935]/70 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-start gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-black text-amber-400 flex items-center justify-center shrink-0 shadow-lg border-2 border-stone-600">
+              <Upload className="w-7 h-7 text-amber-400" />
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                  Direct Submission Engine
+                </span>
+                <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/30">
+                  No Code / HTML Needed
+                </span>
+              </div>
+              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
+                Upload Names & Pictures Directly to Any Cadre
+              </h3>
+              <p className="text-xs sm:text-sm text-[#DFD1C6] max-w-2xl">
+                Easily submit yourself, a family member, or community hero with full name, title, cadre (Military, Paramilitary, Police, Academicians), ward, bio, and direct photograph upload.
+              </p>
+            </div>
+          </div>
+
+          {/* Standard Button matching background color */}
+          <button
+            onClick={() => setIsDirectUploadOpen(true)}
+            className="w-full md:w-auto px-6 py-3.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-xl border-2 border-stone-500 hover:border-amber-400 transition flex items-center justify-center gap-2 shrink-0 hover:-translate-y-0.5"
+          >
+            <PlusCircle className="w-5 h-5 text-amber-400" />
+            <span>Open Direct Upload Form</span>
+          </button>
         </div>
       </section>
 
@@ -905,7 +1002,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <ChevronRight className="w-4 h-4" />
               </button>
               <button
-                onClick={() => onNavigate('members')}
+                onClick={() => onNavigate('ordinary-members')}
                 className="px-5 py-2.5 rounded-xl bg-[#452718] hover:bg-[#57321F] text-[#F8EFE8] font-semibold text-xs uppercase tracking-wider border border-[#7F4E2F] transition"
               >
                 Register as Community Resident
@@ -914,6 +1011,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      {/* Direct Upload Modal */}
+      <DirectUploadModal
+        isOpen={isDirectUploadOpen}
+        onClose={() => setIsDirectUploadOpen(false)}
+        defaultCategory="Military"
+        onSuccessNavigate={(tab) => {
+          onNavigate(tab);
+        }}
+      />
     </div>
   );
 };

@@ -12,7 +12,6 @@ import { NotificationModal } from './components/NotificationModal';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
-import { TraditionalRulerPage } from './pages/TraditionalRulerPage';
 import { PalaceAdminPage } from './pages/PalaceAdminPage';
 import { AnnouncementsPage } from './pages/AnnouncementsPage';
 import { EventsPage } from './pages/EventsPage';
@@ -20,12 +19,10 @@ import { DevelopmentPage } from './pages/DevelopmentPage';
 import { NewsPage } from './pages/NewsPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { DocumentsPage } from './pages/DocumentsPage';
-import { MembersDirectoryPage } from './pages/MembersDirectoryPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
-import { ForceMenPage } from './pages/ForceMenPage';
-import { TraditionalRulersDirectoryPage } from './pages/TraditionalRulersDirectoryPage';
 import { CommunityMembersPage } from './pages/CommunityMembersPage';
+import { DistinguishedDirectoryPage } from './pages/DistinguishedDirectoryPage';
 
 const AppContent: React.FC = () => {
   const { currentTab, setCurrentTab } = useCommunity();
@@ -49,16 +46,25 @@ const AppContent: React.FC = () => {
         return <HomePage onNavigate={handleNavigate} />;
       case 'about':
         return <AboutPage />;
-      case 'traditional-rulers':
-        return <TraditionalRulersDirectoryPage />;
-      case 'ruler':
-        return <TraditionalRulerPage />;
       case 'palace':
+      case 'traditional-rulers':
+      case 'ruler':
         return <PalaceAdminPage />;
+      case 'military':
+        return <DistinguishedDirectoryPage initialCategory="Military" />;
+      case 'paramilitary':
+        return <DistinguishedDirectoryPage initialCategory="Paramilitary" />;
+      case 'police':
+        return <DistinguishedDirectoryPage initialCategory="Police" />;
+      case 'academicians':
+        return <DistinguishedDirectoryPage initialCategory="Academicians" />;
+      case 'distinguished-all':
+      case 'distinguished':
       case 'forcemen':
-        return <ForceMenPage />;
+        return <DistinguishedDirectoryPage initialCategory="All" />;
       case 'ordinary-members':
       case 'community-members':
+      case 'members':
         return <CommunityMembersPage />;
       case 'announcements':
         return <AnnouncementsPage initialSelectedId={currentTabId} />;
@@ -72,8 +78,6 @@ const AppContent: React.FC = () => {
         return <GalleryPage />;
       case 'documents':
         return <DocumentsPage />;
-      case 'members':
-        return <MembersDirectoryPage />;
       case 'contact':
         return <ContactPage />;
       case 'dashboard':
